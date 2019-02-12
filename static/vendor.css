@@ -21,7 +21,7 @@ strong {
 
 button,
 input {
-  font-family: inherit; 
+  font-family: inherit;
   font-size: 100%;
   line-height: 1.15;
   margin: 0;
@@ -232,7 +232,7 @@ button:-moz-focusring {
 
 .wrapper__filter {
   order: 1;
-} 
+}
 
 .wrapper__aside {
   order: 2;
@@ -254,7 +254,7 @@ button:-moz-focusring {
     -ms-grid-columns: 40% 60%;
     -ms-grid-rows: 80px 56px 1fr;
     grid-template-columns: 40% 60%;
-    grid-template-rows: 80px 56px 1fr; 
+    grid-template-rows: 80px 56px 1fr;
   }
 
   .wrapper__header {
@@ -263,7 +263,7 @@ button:-moz-focusring {
     -ms-grid-column-span: 2;
     grid-column: 1 / -1;
   }
-  
+
   .wrapper__aside {
     order: 1;
     -ms-grid-column: 1;
@@ -272,7 +272,7 @@ button:-moz-focusring {
     grid-column: 1;
     grid-row: 2 / 4;
   }
-  
+
   .wrapper__filter {
     order: 2;
     -ms-grid-column: 2;

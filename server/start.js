@@ -1,3 +1,4 @@
+require( 'dotenv' ).config();
 const path = require( 'path' );
 
 const Koa = require( 'koa' );
@@ -7,8 +8,12 @@ const getPort = require( 'get-port' );
 async function runServer () {
     const port = await getPort( { port: 3000 } );
 
+    const dir = process.env.NODE_ENV === 'production'
+        ? 'bundleProd'
+        : 'bundleDev';
+
     const app = new Koa();
-    app.use( koaStatic( path.join( __dirname, '..', 'static' ) ) );
+    app.use( koaStatic( path.join( __dirname, '..', dir ) ) );
     app.listen( port );
 
     /* eslint-disable no-console */

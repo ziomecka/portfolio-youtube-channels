@@ -1,17 +1,21 @@
-const path = require('path');
+const path = require( 'path' );
 
-const Koa = require('koa');
-const koaStatic = require('koa-static');
-const getPort = require('get-port');
+const Koa = require( 'koa' );
+const koaStatic = require( 'koa-static' );
+const getPort = require( 'get-port' );
 
-async function runServer() {
-    const port = await getPort({ port: 3000 });
+async function runServer () {
+    const port = await getPort( { port: 3000 } );
 
     const app = new Koa();
-    app.use(koaStatic(path.join(__dirname, '..', 'static')));
-    app.listen(port);
+    app.use( koaStatic( path.join( __dirname, '..', 'static' ) ) );
+    app.listen( port );
 
-    console.log(`server started at http://localhost:${port}/`);
+    /* eslint-disable no-console */
+    console.log( `server started at http://localhost:${port}/` );
+    /* eslint-enable no-console */
 }
 
-runServer().catch(console.error);
+/* eslint-disable no-console */
+runServer().catch( console.error );
+/* eslint-enable no-console */

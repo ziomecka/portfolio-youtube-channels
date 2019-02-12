@@ -9,6 +9,17 @@ module.exports = {
     entry: {
         app: path.resolve( __dirname, '../static/js/index.js' ),
     },
+    module: {
+        rules: [
+            {
+                test: /\.css$/,
+                use: [
+                    'style-loader',
+                    'css-loader',
+                ],
+            },
+        ],
+    },
     plugins: [
         html,
     ],

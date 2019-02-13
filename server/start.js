@@ -4,6 +4,7 @@ const path = require( 'path' );
 const Koa = require( 'koa' );
 const koaStatic = require( 'koa-static' );
 const getPort = require( 'get-port' );
+const router = require( './router' );
 
 async function runServer () {
     const port = await getPort( { port: 3000 } );
@@ -14,6 +15,7 @@ async function runServer () {
 
     const app = new Koa();
     app.use( koaStatic( path.join( __dirname, '..', dir ) ) );
+    app.use( router );
     app.listen( port );
 
     /* eslint-disable no-console */

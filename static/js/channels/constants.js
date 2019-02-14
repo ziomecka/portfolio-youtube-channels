@@ -36,6 +36,8 @@ const IMAGES_SIZES = new Map( [
     ['xl', 'high'],
 ] );
 
+const LISTENERS_ID = 'channelsListeners';
+
 export {
     CHANNELS_ERRORS,
     DEFAULT_CHANNELS_LOCALIZED,
@@ -45,4 +47,5 @@ export {
     DEFAULT_IMAGE_WIDTH,
     DEFAULT_LINK_URL,
     IMAGES_SIZES,
+    LISTENERS_ID,
 };

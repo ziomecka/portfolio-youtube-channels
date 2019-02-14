@@ -1,5 +1,4 @@
-require( '../css/vendor.css' );
-require( '../sass/index.sass' );
+require( '../css/index.css' );
 
 import {
     LISTENERS_ID,

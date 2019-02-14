@@ -6,7 +6,7 @@
   "scripts": {
     "bundleDev": "rm -rf bundleDev/* && webpack --config webpack/webpack.dev.js",
     "bundleProd": "rm -rf bundleProd/* && webpack --config webpack/webpack.prod.js",
-    "eslint": "eslint webpack/**/* server/**/* static/js/**/*",
+    "eslint": "eslint webpack/**/* server/**/* static/js/**/* test/**/*",
     "start": "node server/start.js",
     "test": "karma start karma.conf.js"
   },

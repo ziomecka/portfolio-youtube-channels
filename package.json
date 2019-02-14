@@ -8,7 +8,7 @@
     "bundleProd": "rm -rf bundleProd/* && webpack --config webpack/webpack.prod.js",
     "eslint": "eslint webpack/**/* server/**/* static/js/**/*",
     "start": "node server/start.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "karma start karma.conf.js"
   },
   "private": true,
   "license": "ISC",
@@ -21,11 +21,15 @@
     "node-fetch": "2.3.0"
   },
   "devDependencies": {
+    "browserify": "16.2.3",
     "css-loader": "2.1.0",
     "eslint": "5.13.0",
     "html-webpack-plugin": "3.2.0",
     "jasmine": "3.3.1",
     "karma": "4.0.0",
+    "karma-browserify": "6.0.0",
+    "karma-chrome-launcher": "2.2.0",
+    "karma-firefox-launcher": "1.1.0",
     "karma-jasmine": "2.0.1",
     "karma-webpack": "3.0.5",
     "lodash.filter": "4.6.0",
@@ -33,6 +37,7 @@
     "make-runnable": "1.3.6",
     "optimize-css-assets-webpack-plugin": "5.0.1",
     "style-loader": "0.23.1",
+    "watchify": "3.11.0",
     "webpack": "4.29.3",
     "webpack-cli": "3.2.3",
     "webpack-merge": "4.2.1"

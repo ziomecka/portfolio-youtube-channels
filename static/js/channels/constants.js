@@ -3,6 +3,7 @@ const CHANNELS_ERRORS = new Map( [
     ['argument_not_string', 'Argument is not a string'],
     ['argument_not_url', 'Argument is not an url'],
     ['channels_no_data', 'Missing data'],
+    ['html_not_found', 'HTML Element not found'],
 ] );
 
 

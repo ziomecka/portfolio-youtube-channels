@@ -26,6 +26,7 @@ module.exports = {
     resolve: {
         alias: {
             '@constants': ( path.resolve( __dirname, '../static/js/constants' ) ),
+            '@common': ( path.resolve( __dirname, '../static/js/common/' ) ),
         },
     },
 };

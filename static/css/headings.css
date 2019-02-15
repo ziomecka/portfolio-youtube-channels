@@ -1,5 +1,35 @@
 /* @media (max-width: 360px) */
 
+.fjs-header-logo {
+    position: relative;
+    margin-left: 2.2em;
+}
+
+.fjs-header-logo:after,
+.fjs-header-logo:before {
+    position: absolute;
+    bottom: -.2em;
+    left: -2.2em;
+    height: 2em;
+    width: 2em;
+    box-sizing: border-box;
+}
+
+.fjs-header-logo:after {
+    background-color: #f3d248;
+    content: '';
+}
+
+.fjs-header-logo:before {
+    display: inline-flex;
+    justify-content: flex-end;
+    position: absolute;
+    padding: .2em;
+    content: 'JS';
+    line-height: 2em;
+    z-index: 1;
+}
+
 .fjs-text-center,
 .fjs-heading {
     text-align: center;

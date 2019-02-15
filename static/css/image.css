@@ -1,0 +1,28 @@
+/* @media (max-width: 360px) */
+
+.fjs-image {
+    height: auto;
+}
+
+.fjs-image-round {
+    border-radius: 50%;
+}
+
+@media only screen and (min-width: 361px) {
+    .fjs-image {
+        max-width: 150px;
+    }
+}
+
+/* @media only screen and (min-width: 946px) {
+} */
+
+/* desktop */
+
+/* @media only screen and (min-width: 1281px) {
+} */
+
+/* large desktop */
+
+/* @media only screen and (min-width: 1681px) {
+} */

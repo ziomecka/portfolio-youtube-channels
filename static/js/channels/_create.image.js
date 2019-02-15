@@ -1,4 +1,5 @@
 import {
+    CHANNELS_CLASSES,
     CHANNELS_ERRORS,
     DEFAULT_IMAGE_ALT,
     DEFAULT_IMAGE_SIZE,
@@ -30,6 +31,7 @@ const notUrl = CHANNELS_ERRORS.get( 'argument_not_url' );
 /**
  *
  * @param {Object} options
+ * @param {string} options.className default as defined in constants
  * @param {string} options.title
  * @param {string} options.url
  * @param {number} options.width
@@ -37,6 +39,7 @@ const notUrl = CHANNELS_ERRORS.get( 'argument_not_url' );
  */
 function createImageElement ( options ) {
     let {
+        className = `${ CHANNELS_CLASSES.image } ${ CHANNELS_CLASSES.imageRound }`,
         title,
         url,
         width,
@@ -76,6 +79,7 @@ function createImageElement ( options ) {
     return createElement( {
         attributes: {
             alt: title,
+            class: className,
             height: 'auto',
             src: url,
             width,
@@ -117,6 +121,14 @@ function getSize ( media ) {
 
 /**
  *
+ * @typedef {Object} Classes optional
+ * @property {string} containerEl default as defined in constants
+ * @property {string} descriptionEl default as defined in constants
+ * @property {string} imgEl default as defined in constants
+ */
+
+/**
+ *
  * @typedef {Object} Tags optional
  * @property {tag} containerEl default figure
  * @property {tag} descriptionEl default figCaption
@@ -137,6 +149,15 @@ function getSize ( media ) {
  */
 function createImage ( options ) {
     let {
+        classes: {
+            containerEl: containerElClass,
+            descriptionEl: descriptionElClass,
+            imgElClass: imgElClass,
+        } = {
+            containerEl: `${ CHANNELS_CLASSES.flexColumnCenter} ${CHANNELS_CLASSES.blockWide }`,
+            descriptionEl: `${ CHANNELS_CLASSES.blockWide } ${ CHANNELS_CLASSES.heading }`,
+            imgEl: `${ CHANNELS_CLASSES.image } ${ CHANNELS_CLASSES.imageRound }`,
+        },
         customUrl,
         localized: { title: localizedTitle },
         media,
@@ -167,6 +188,7 @@ function createImage ( options ) {
 
     const $container = createElement( {
         tag: containerEl,
+        attributes: { class: containerElClass },
         window,
     } );
 
@@ -189,6 +211,7 @@ function createImage ( options ) {
     appendChild( {
         element: $imageWrapper,
         child: createImageElement( {
+            className: imgElClass,
             title: localizedTitle,
             url,
             width,
@@ -205,6 +228,7 @@ function createImage ( options ) {
     appendChild( {
         element: $container,
         child: createElement( {
+            attributes: { class: descriptionElClass },
             tag: descriptionEl,
             textContent: localizedTitle,
             window,

@@ -1,3 +1,17 @@
+const CHANNELS_CLASSES = {
+    blockWide: 'fjs-block-wide',
+    boxPrimary: 'fjs-box-primary',
+    flexColumn: 'fjs-flex-column',
+    flexColumnCenter: 'fjs-flex-column-center',
+    flexRow: 'fjs-flex-row',
+    flexRowCenter: 'fjs-flex-row-center',
+    flexRowSpaceAround: 'fjs-flex-row-space-around',
+    heading: 'fjs-heading',
+    image: 'fjs-image',
+    imageRound: 'fjs-image-round',
+    textCenter: 'fjs-text-center',
+};
+
 const CHANNELS_ERRORS = new Map( [
     ['argument_not_number', 'Argument is not a number'],
     ['argument_not_string', 'Argument is not a string'],
@@ -6,7 +20,7 @@ const CHANNELS_ERRORS = new Map( [
     ['html_not_found', 'HTML Element not found'],
 ] );
 
-const CHANNELS_ROOT_SELECTOR = '.wrapper__main.js-content';
+const CHANNELS_ROOT_SELECTOR = '.wrapper__main.fjs-content';
 
 const DEFAULT_CHANNELS_LOCALIZED = {
     statisticsValue: '-',
@@ -42,6 +56,7 @@ const LISTENERS_ID = 'channelsListeners';
 export { URLS } from '../../../server/constants';
 
 export {
+    CHANNELS_CLASSES,
     CHANNELS_ERRORS,
     CHANNELS_ROOT_SELECTOR,
     DEFAULT_CHANNELS_LOCALIZED,

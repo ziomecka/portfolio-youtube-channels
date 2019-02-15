@@ -1,4 +1,5 @@
 import {
+    CHANNELS_CLASSES,
     CHANNELS_ERRORS,
     DEFAULT_CHANNELS_LOCALIZED,
 } from './constants';
@@ -26,6 +27,7 @@ const isProduction = process.env.NODE_ENV === 'production';
 /**
  *
  * @param {Object} options
+ * @param {Object} options.classes
  * @param {string} options.description
  * @param {string} options.value
  * @param {...Tags} options.tags default { descriptionEl: p, detailsEl: span }
@@ -33,6 +35,13 @@ const isProduction = process.env.NODE_ENV === 'production';
  */
 function _createStats ( options ) {
     let {
+        classes: {
+            descriptionEl: descriptionElClass,
+            detailsEl: detailsElClass,
+        } = {
+            descriptionEl: CHANNELS_CLASSES.flexColumnCenter,
+            detailsEl: `${CHANNELS_CLASSES.blockWide} ${CHANNELS_CLASSES.textCenter }`,
+        },
         description,
         tags: {
             descriptionEl,
@@ -64,12 +73,14 @@ function _createStats ( options ) {
 
     const $container = createElement( {
         tag: descriptionEl,
+        attributes: { class: descriptionElClass },
         window,
     } );
 
     appendChild( {
         element: $container,
         child: createElement( {
+            attributes: { class: detailsElClass },
             tag: detailsEl,
             textContent: `${ description }: `,
             window,
@@ -79,6 +90,7 @@ function _createStats ( options ) {
     appendChild( {
         element: $container,
         child: createElement( {
+            attributes: { class: detailsElClass },
             tag: detailsEl,
             textContent: value,
             window,
@@ -98,6 +110,14 @@ function _createStats ( options ) {
  */
 
 /**
+ *
+ * @typedef {Object} Classes optional
+ * @property {string} containerEl default as defined in constants
+ * @property {string} descriptionEl default as defined in constants
+ * @property {string} detailsEl default as defined in constants
+ */
+
+/**
  * The thumbnail data.
  * @typedef {Object} Statistics
  * @property {boolean} hiddenSubscriberCount optional, default true
@@ -110,6 +130,7 @@ function _createStats ( options ) {
  *
  * @param {Object} options
  * @param {...ChannelsLocalized} options.channelsLocalized default {}
+ * @param {...Classes} options.classes optional
  * @param {...Statistics} options.statistics default {}
  * @param {...Tags} options.tags default { containerEl: div, descriptionEl: p, detailsEl: span }
  * @returns HTMLElement
@@ -122,6 +143,16 @@ function createStats ( options ) {
             videos,
             views,
         } = {},
+        classes: {
+            containerEl: containerElClass,
+            descriptionEl: descriptionElClass,
+            detailsEl: detailsElClass,
+
+        } = {
+            containerEl: `${ CHANNELS_CLASSES.flexRowSpaceAround } ${ CHANNELS_CLASSES.blockWide }`,
+            descriptionEl: CHANNELS_CLASSES.flexColumnCenter,
+            detailsEl: `${CHANNELS_CLASSES.blockWide} ${CHANNELS_CLASSES.textCenter }`,
+        },
         statistics: {
             hiddenSubscriberCount = true,
             subscriberCount,
@@ -141,6 +172,7 @@ function createStats ( options ) {
 
     const $container = createElement( {
         tag: containerEl,
+        attributes: { class: containerElClass },
         window,
     } );
 
@@ -158,6 +190,11 @@ function createStats ( options ) {
         }
     }
 
+    const commonClasses = {
+        descriptionEl: descriptionElClass,
+        detailsEl: detailsElClass,
+    };
+
     const commonTags = {
         descriptionEl,
         detailsEl,
@@ -170,6 +207,7 @@ function createStats ( options ) {
         appendChild( {
             element: $container,
             child: _createStats( {
+                classes: commonClasses,
                 description: subscribers || DEFAULT_CHANNELS_LOCALIZED.subscribers,
                 tags: commonTags,
                 value: convertNumbers( subscriberCount ) || statisticsValue || defaultStatisticsValue,
@@ -181,6 +219,7 @@ function createStats ( options ) {
     appendChild( {
         element: $container,
         child: _createStats( {
+            classes: commonClasses,
             description: videos || DEFAULT_CHANNELS_LOCALIZED.videos,
             tags: commonTags,
             value: convertNumbers( videoCount ) || statisticsValue || defaultStatisticsValue,
@@ -191,6 +230,7 @@ function createStats ( options ) {
     appendChild( {
         element: $container,
         child: _createStats( {
+            classes: commonClasses,
             description: views || DEFAULT_CHANNELS_LOCALIZED.views,
             tags: commonTags,
             value: convertNumbers( viewCount ) || statisticsValue || defaultStatisticsValue,

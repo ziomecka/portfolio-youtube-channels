@@ -20,8 +20,6 @@ const CHANNELS_ERRORS = new Map( [
     ['html_not_found', 'HTML Element not found'],
 ] );
 
-const CHANNELS_ROOT_SELECTOR = '.wrapper__main.fjs-content';
-
 const DEFAULT_CHANNELS_LOCALIZED = {
     statisticsValue: '-',
     subscribers: 'subscribers',
@@ -58,7 +56,6 @@ export { URLS } from '../../../server/constants';
 export {
     CHANNELS_CLASSES,
     CHANNELS_ERRORS,
-    CHANNELS_ROOT_SELECTOR,
     DEFAULT_CHANNELS_LOCALIZED,
     DEFAULT_IMAGE_ALT,
     DEFAULT_IMAGE_SIZE,

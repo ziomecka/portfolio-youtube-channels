@@ -28,6 +28,8 @@ module.exports = {
             '@constants': ( path.resolve( __dirname, '../static/js/constants' ) ),
             '@common': ( path.resolve( __dirname, '../static/js/common/' ) ),
             '@channels': ( path.resolve( __dirname, '../static/js/channels/' ) ),
+            // @server only for testing - karma bundling
+            '@server': ( path.resolve( __dirname, '../server/data/' ) ),
         },
     },
 };

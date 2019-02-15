@@ -1,9 +1,26 @@
 import {
+    LISTENERS_ID,
     URLS,
 } from './constants';
 
-import { api } from '@common';
+import {
+    api,
+    removeAllMediaQueryListeners,
+} from '@common';
+
 import createChannels from './_create.channels';
+
+async function _loadChannels ( root ) {
+    try {
+        createChannels( {
+            data: await api.get( URLS.channels ),
+            root,
+        } );
+    } catch ( err ) {
+        // TODO display error info
+        return undefined;
+    }
+}
 
 async function loadChannels ( root ) {
     if ( process.env.NODE_ENV !== 'production' ) {
@@ -15,15 +32,9 @@ async function loadChannels ( root ) {
         }
     }
 
-    try {
-        createChannels( {
-            data: await api.get( URLS.channels ),
-            root,
-        } );
-    } catch ( err ) {
-        // TODO display error info
-        return undefined;
-    }
+    // IMPORTANT: If new channels loaded then firstly remove the media query listeners!
+    removeAllMediaQueryListeners( { id: LISTENERS_ID } );
+    _loadChannels( root );
 }
 
 export default loadChannels;

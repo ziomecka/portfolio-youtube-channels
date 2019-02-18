@@ -8,13 +8,8 @@
         <header class="wrapper__header">
             <h1 class="fjs-header-logo">Channels</h1>
         </header>
-        <main id="fjs-main" class="wrapper__main fjs-content">
-        </main>
-        <div class="wrapper__filter">
-            <div class="filter">
-                <input class="filter__input" type="text" placeholder="filter channels...">
-            </div>
-        </div>
+        <main id="fjs-main" class="wrapper__main fjs-content"></main>
+        <div id="fjs-filter-container" class="wrapper__filter"></div>
         <aside class="wrapper__aside">
             <div class="sort">
                 <h3 class="sort__header">Sort channels by:</h3>
@@ -35,6 +30,7 @@
                         <input class="choice choice--radio" name="sort" type="radio" id="sort-views">
                         <label class="choice__label" for="sort-views">views</label>
                     </li>
+                <ul id="fjs-sort-container" class="sort__options">
                 </ul>
                 <button class="button">Clear</button>
             </div>

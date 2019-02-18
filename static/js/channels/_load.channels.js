@@ -1,5 +1,6 @@
 import {
     LISTENERS_ID,
+    STORAGE_ID,
     URLS,
 } from './constants';
 
@@ -15,10 +16,36 @@ async function _loadChannels ( options ) {
     const { root } = options;
     let { data } = options;
 
+    /**
+     * if data is not provided in arguments
+     * then
+     * - get data from localStorage and if data then createChannels AND
+     * - get data from server, if data
+     *      - remove channels received from localStorage
+     *      - then createChannels and store data in localStorage
+     *      - else display some error TODO
+     * else
+     * - use the data to createChannels
+     */
     if ( !data ) {
+        data = localStorage.getItem( STORAGE_ID );
+
+        if ( data ) {
+            // add channels recived from localStorage
+            createChannels( { data: JSON.parse( data ), root } );
+        }
+
         try {
             data = await api.get( { url: URLS.channels } );
+
+            // remove channels loaded from localStorage
+            removeChannels( options.root );
+
+            // add channels received from server
             createChannels( { data, root } );
+
+            // store channels in localStorage
+            localStorage.setItem( STORAGE_ID, JSON.stringify( data ) );
         } catch ( err ) {
             /* eslint-disable no-console */
             console.log( err );

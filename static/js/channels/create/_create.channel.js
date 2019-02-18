@@ -5,7 +5,7 @@ import {
 
 import {
     manageDom,
-    registerMediaQueryListener,
+    manageMedia,
 } from '@common';
 
 import createImage from './_create.image';
@@ -79,8 +79,9 @@ function createChannel ( options ) {
         child: $image,
     } );
 
+
     // register listeners for media query changes
-    registerMediaQueryListener( {
+    manageMedia.subscribeToMediaChanges( {
         id: LISTENERS_ID,
         listener: ( media ) => mediaQueryListener( {
             id: getAttribute( { element: getFirstChild( $image ), attribute: 'id' } ),

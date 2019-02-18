@@ -55,7 +55,7 @@ function createImageElement ( options ) {
         }
     }
 
-    if ( !isValidUrl( url ) ) {
+    if ( !isValidUrl( { url } ) ) {
         url = DEFAULT_IMAGE_URL.get( DEFAULT_IMAGE_SIZE );
 
         if ( !isProduction ) {
@@ -176,7 +176,7 @@ function createImage ( options ) {
     const id = getId( title );
     const size = getSize( media );
 
-    if ( !isValidUrl( customUrl ) ) {
+    if ( !isValidUrl( { url: customUrl } ) ) {
         customUrl = DEFAULT_LINK_URL;
 
         if ( !isProduction ) {

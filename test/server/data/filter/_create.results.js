@@ -12,7 +12,7 @@ const pathName = '_results.json';
 const outputPath = path.resolve( __dirname, pathName );
 
 const data = require( './_data' );
-const helper = require( './_helper' );
+const helper = require( './_filter.helper' );
 
 const results = {
     'f': helper( { pattern: 'f', field: 'title', data } ),

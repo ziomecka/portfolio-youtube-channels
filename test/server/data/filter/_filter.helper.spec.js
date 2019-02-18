@@ -1,5 +1,5 @@
 /* eslint-disable no-console, no-undef, no-global-assign */
-import helper from './_helper';
+import helper from './_filter.helper';
 
 describe( 'filter helper', () => {
     let data;

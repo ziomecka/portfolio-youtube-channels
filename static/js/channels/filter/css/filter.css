@@ -1,0 +1,7 @@
+/* override vendor to enable displaying more then one filter */
+@media only screen and (min-width: 544px) {
+    body.wrapper {
+        -ms-grid-rows: 80px auto 1fr;
+        grid-template-rows: 80px auto 1fr;
+    }
+}

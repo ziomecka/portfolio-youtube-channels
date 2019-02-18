@@ -2,6 +2,7 @@ require( '../css/index.css' );
 
 import {
     CHANNELS_ROOT_SELECTOR,
+    CLEAR,
     FILTER,
     MEDIA,
     SORT,
@@ -9,6 +10,7 @@ import {
 } from './constants';
 
 import {
+    enableClearing,
     enableFiltering,
     enableSorting,
     loadChannels,
@@ -19,25 +21,25 @@ import {
 } from '@common';
 
 // ADD MEDIA LISTENERS
-manageMedia.addMediaListeners({ media: MEDIA, window });
+manageMedia.addMediaListeners( { media: MEDIA, window } );
 
 // ADD FILTERS
 const {
     container: filterContainer,
-    id: filterId
+    id: filterId,
 } = FILTER;
 
 const {
     filterChannels: filterChannelsUrl,
 } = URLS;
 
-enableFiltering({
+enableFiltering( {
     containerSelector: filterContainer,
     field: 'title',
     filterSelector: filterId,
     root: CHANNELS_ROOT_SELECTOR,
     url: filterChannelsUrl,
-});
+} );
 
 // enableFiltering({
 //     containerSelector: filterContainer,
@@ -50,14 +52,14 @@ enableFiltering({
 // ADD SORTERS
 const {
     container: sortContainer,
-    id: sortId
+    id: sortId,
 } = SORT;
 
 const {
     sortChannels: sortChannelsUrl,
 } = URLS;
 
-enableSorting({
+enableSorting( {
     containerSelector: sortContainer,
     direction: 'desc',
     field: 'title',
@@ -65,9 +67,9 @@ enableSorting({
     root: CHANNELS_ROOT_SELECTOR,
     sortSelector: `${sortId}-title`,
     url: sortChannelsUrl,
-});
+} );
 
-enableSorting({
+enableSorting( {
     containerSelector: sortContainer,
     direction: 'desc',
     field: 'statistics.subscriberCount',
@@ -75,9 +77,9 @@ enableSorting({
     root: CHANNELS_ROOT_SELECTOR,
     sortSelector: `${sortId}-subscriber`,
     url: sortChannelsUrl,
-});
+} );
 
-enableSorting({
+enableSorting( {
     containerSelector: sortContainer,
     direction: 'desc',
     field: 'statistics.videoCount',
@@ -85,9 +87,9 @@ enableSorting({
     root: CHANNELS_ROOT_SELECTOR,
     sortSelector: `${sortId}-video`,
     url: sortChannelsUrl,
-});
+} );
 
-enableSorting({
+enableSorting( {
     containerSelector: sortContainer,
     direction: 'desc',
     field: 'statistics.viewCount',
@@ -95,7 +97,18 @@ enableSorting({
     root: CHANNELS_ROOT_SELECTOR,
     sortSelector: `${sortId}-view`,
     url: sortChannelsUrl,
-});
+} );
+
+// ENABLE CLEARING
+const {
+    id: clearId,
+} = CLEAR;
+
+enableClearing( {
+    clearSelector: clearId,
+    filterSelector: filterId,
+    sortSelector: sortId,
+} );
 
 // LOAD CHANNELS
 loadChannels( { root: CHANNELS_ROOT_SELECTOR } );

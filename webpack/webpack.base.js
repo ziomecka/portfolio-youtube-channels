@@ -23,4 +23,9 @@ module.exports = {
     plugins: [
         html,
     ],
+    resolve: {
+        alias: {
+            '@constants': ( path.resolve( __dirname, '../static/js/constants' ) ),
+        },
+    },
 };

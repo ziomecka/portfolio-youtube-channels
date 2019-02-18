@@ -1,0 +1,4 @@
+/* thank to the relative position the sort icon can be positioned absolutely */
+.fjs-sort-content {
+    position: relative;
+}

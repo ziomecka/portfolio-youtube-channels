@@ -1,5 +1,6 @@
 export { MEDIA } from './constants';
 export { default as manageDomListeners } from './dom.listeners';
+export { default as buildId } from './_build.id';
 export { default as api } from './_api';
 export { default as helpers } from './_helpers';
 export { default as manageMedia } from './media/';

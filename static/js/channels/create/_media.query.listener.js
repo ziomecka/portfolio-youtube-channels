@@ -17,9 +17,11 @@ const {
     removeChild,
 } = manageDom;
 
-const isProduction = process.env.NODE_ENV === 'production';
+let notHTML;
 
-const notHTML = CHANNELS_ERRORS.get( 'html_not_found' );
+if ( process.env.NODE_ENV !== 'production' ) {
+    notHTML = CHANNELS_ERRORS.get( 'html_not_found' );
+}
 
 /**
  * The thumbnail data.
@@ -59,7 +61,7 @@ function mediaQueryListener ( options ) {
         window,
     } );
 
-    if ( !isProduction ) {
+    if ( process.env.NODE_ENV !== 'production' ) {
         if ( !$imageWrapper ) {
             /* eslint-disable no-console */
             console.warn( `channels mediaQueryListener wrapper: ${ notHTML }` );
@@ -75,7 +77,7 @@ function mediaQueryListener ( options ) {
         // assumption - first child of wrapper is the current image
         const $image = getFirstChild( $imageWrapper );
 
-        if ( !isProduction ) {
+        if ( process.env.NODE_ENV !== 'production' ) {
             if ( !$image ) {
                 /* eslint-disable no-console */
                 console.warn( `channels mediaQueryListener image: ${ notHTML }` );

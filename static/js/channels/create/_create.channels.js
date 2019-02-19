@@ -11,8 +11,6 @@ const {
     findElement,
 } = manageDom;
 
-const isProduction = process.env.NODE_ENV === 'production';
-
 /**
  *
  * @param {Object} options
@@ -41,9 +39,11 @@ function createChannels ( options ) {
     if ( $root ) {
         // if no channelsData then return undefined
         if ( !Array.isArray( data ) ) {
-            /* eslint-disable no-console */
-            console.warn( `createChannels: ${ CHANNELS_ERRORS.get( 'channels_no_data' )}` );
-            /* eslint-enable no-console */
+            if ( process.env.NODE_ENV !== 'production' ) {
+                /* eslint-disable no-console */
+                console.warn( `createChannels: ${ CHANNELS_ERRORS.get( 'channels_no_data' )}` );
+                /* eslint-enable no-console */
+            }
 
             return undefined;
             // TODO display message to user
@@ -61,7 +61,7 @@ function createChannels ( options ) {
             } );
         } );
     } else {
-        if ( !isProduction ) {
+        if ( process.env.NODE_ENV !== 'production' ) {
             if ( !$root ) {
                 /* eslint-disable no-console */
                 console.warn( `createChannels: ${ CHANNELS_ERRORS.get( 'html_not_found' ) }` );

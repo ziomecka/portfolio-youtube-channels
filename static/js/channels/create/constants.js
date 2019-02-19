@@ -12,13 +12,17 @@ const CHANNELS_CLASSES = {
     textCenter: 'fjs-text-center',
 };
 
-const CHANNELS_ERRORS = new Map( [
-    ['argument_not_number', 'Argument is not a number'],
-    ['argument_not_string', 'Argument is not a string'],
-    ['argument_not_url', 'Argument is not an url'],
-    ['channels_no_data', 'Missing data'],
-    ['html_not_found', 'HTML Element not found'],
-] );
+let CHANNELS_ERRORS;
+
+if ( process.env.NODE_ENV !== 'production' ) {
+    CHANNELS_ERRORS = new Map( [
+        ['argument_not_number', 'Argument is not a number'],
+        ['argument_not_string', 'Argument is not a string'],
+        ['argument_not_url', 'Argument is not an url'],
+        ['channels_no_data', 'Missing data'],
+        ['html_not_found', 'HTML Element not found'],
+    ] );
+}
 
 const DEFAULT_CHANNELS_LOCALIZED = {
     statisticsValue: '-',

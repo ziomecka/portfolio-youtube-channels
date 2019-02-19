@@ -11,10 +11,13 @@ import {
 
 const { appendChild, createElement } = manageDom;
 
-const notString = CHANNELS_ERRORS.get( 'argument_not_string' );
-const noData = CHANNELS_ERRORS.get( 'channels_no_data' );
+let notString;
+let noData;
 
-const isProduction = process.env.NODE_ENV === 'production';
+if ( process.env.NODE_ENV !== 'production' ) {
+    notString = CHANNELS_ERRORS.get( 'argument_not_string' );
+    noData = CHANNELS_ERRORS.get( 'channels_no_data' );
+}
 
 /**
  *
@@ -57,7 +60,7 @@ function _createStats ( options ) {
     } = options;
 
     if ( !description || ( typeof description !== 'string' ) ) {
-        if ( !isProduction ) {
+        if ( process.env.NODE_ENV !== 'production' ) {
             /* eslint-disable no-console */
             console.warn( `createStats description: ${ notString }` );
             /* eslint-enable no-console */
@@ -66,7 +69,7 @@ function _createStats ( options ) {
     }
 
     if ( !value || ( typeof value !== 'string' ) ) {
-        if ( !isProduction ) {
+        if ( process.env.NODE_ENV !== 'production' ) {
             /* eslint-disable no-console */
             console.warn( `createStats value: ${ notString }` );
             /* eslint-enable no-console */
@@ -179,7 +182,7 @@ function createStats ( options ) {
         window,
     } );
 
-    if ( !isProduction ) {
+    if ( process.env.NODE_ENV !== 'production' ) {
         if ( options.channelsLocalized !== Object( options.channelsLocalized ) ) {
             /* eslint-disable no-console */
             console.warn( `createStats channelsLocalized: ${ noData }` );

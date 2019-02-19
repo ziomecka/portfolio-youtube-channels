@@ -22,11 +22,15 @@ const {
 // used to create id in getId
 let id = 0;
 
-const isProduction = process.env.NODE_ENV === 'production';
+let notNumber;
+let notString;
+let notUrl;
 
-const notNumber = CHANNELS_ERRORS.get( 'argument_not_number' );
-const notString = CHANNELS_ERRORS.get( 'argument_not_string' );
-const notUrl = CHANNELS_ERRORS.get( 'argument_not_url' );
+if ( process.env.NODE_ENV !== 'production' ) {
+    notNumber = CHANNELS_ERRORS.get( 'argument_not_number' );
+    notString = CHANNELS_ERRORS.get( 'argument_not_string' );
+    notUrl = CHANNELS_ERRORS.get( 'argument_not_url' );
+}
 
 /**
  *
@@ -51,7 +55,7 @@ function createImageElement ( options ) {
     if ( !title || typeof title !== 'string' ) {
         title = DEFAULT_IMAGE_ALT;
 
-        if ( !isProduction ) {
+        if ( process.env.NODE_ENV !== 'production' ) {
             /* eslint-disable no-console */
             console.warn( `createImageElement: ${ notString }` );
             /* eslint-enable no-console */
@@ -61,7 +65,7 @@ function createImageElement ( options ) {
     if ( !isValidUrl( { url } ) ) {
         url = DEFAULT_IMAGE_URL.get( DEFAULT_IMAGE_SIZE );
 
-        if ( !isProduction ) {
+        if ( process.env.NODE_ENV !== 'production' ) {
             /* eslint-disable no-console */
             console.warn( `createImageElement: ${ notUrl }` );
             /* eslint-enable no-console */
@@ -71,7 +75,7 @@ function createImageElement ( options ) {
     if ( !width || typeof width !== 'number' ) {
         width = DEFAULT_IMAGE_WIDTH;
 
-        if ( !isProduction ) {
+        if ( process.env.NODE_ENV !== 'production' ) {
             /* eslint-disable no-console */
             console.warn( `createImageElement: ${ notNumber }` );
             /* eslint-enable no-console */
@@ -99,7 +103,7 @@ function createImageElement ( options ) {
  */
 function getId ( title ) {
     if ( typeof title !== 'string' ) {
-        if ( !isProduction ) {
+        if ( process.env.NODE_ENV !== 'production' ) {
             /* eslint-disable no-console */
             console.warn( `getId: ${ notString }` );
             /* eslint-enable no-console */
@@ -183,7 +187,7 @@ function createImage ( options ) {
     if ( !isValidUrl( { url: customUrl } ) ) {
         customUrl = DEFAULT_LINK_URL;
 
-        if ( !isProduction ) {
+        if ( process.env.NODE_ENV !== 'production' ) {
             /* eslint-disable no-console */
             console.warn( `createImage: ${ notUrl }` );
             /* eslint-enable no-console */

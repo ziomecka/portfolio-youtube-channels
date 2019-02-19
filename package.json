@@ -7,14 +7,13 @@
     "bundleDev": "rm -rf bundleDev/* && webpack --config webpack/webpack.dev.js",
     "bundleProd": "rm -rf bundleProd/* && webpack --config webpack/webpack.prod.js",
     "eslint": "eslint webpack/**/* server/**/* static/js/**/* test/**/*",
-    "start": "node server/start.js",
+    "start": "node server/start.js $PORT",
     "test": "karma start karma.conf.js"
   },
   "private": true,
   "license": "ISC",
   "dependencies": {
     "dotenv": "6.2.0",
-    "get-port": "4.0.0",
     "koa": "2.5.2",
     "koa-router": "7.4.0",
     "koa-static": "5.0.0",
@@ -47,5 +46,9 @@
     "webpack": "4.29.3",
     "webpack-cli": "3.2.3",
     "webpack-merge": "4.2.1"
+  },
+  "engines": {
+    "node": "8.15.0",
+    "npm": "6.7.0"
   }
 }

@@ -3,23 +3,29 @@ const path = require( 'path' );
 
 const Koa = require( 'koa' );
 const koaStatic = require( 'koa-static' );
-const getPort = require( 'get-port' );
 const router = require( './router' );
 
 async function runServer () {
-    const port = await getPort( { port: 3000 } );
+    const PORT = process.env.NODE_ENV === 'production'
+        ? process.env.PORT
+        : 3000;
 
     const dir = process.env.NODE_ENV === 'production'
-        ? 'bundleProd'
-        : 'bundleDev';
-
-    const app = new Koa();
-    app.use( koaStatic( path.join( __dirname, '..', dir ) ) );
-    app.use( router );
-    app.listen( port );
+        ? path.resolve( __dirname, '../bundleProd/' )
+        : path.resolve( __dirname, '../bundleDev/' );
 
     /* eslint-disable no-console */
-    console.log( `server started at http://localhost:${port}/` );
+    console.log( `Static files are served from: ${ dir }` );
+    /* eslint-enable no-console */
+
+    const app = new Koa();
+
+    app.use( koaStatic( dir ) );
+    app.use( router );
+    app.listen( PORT );
+
+    /* eslint-disable no-console */
+    console.log( `server started at ${ PORT }` );
     /* eslint-enable no-console */
 }
 

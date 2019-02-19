@@ -1,8 +1,8 @@
 const { URLS } = require( './constants' );
 
-const getChannels = require('./router/').getChannels;
+const getChannels = require( './router/' ).getChannels;
 const filterChannels = require( './router/' ).filterChannels;
-const sortChannels = require('./router/').sortChannels;
+const sortChannels = require( './router/' ).sortChannels;
 
 const router = require( 'koa-router' )();
 

@@ -38,8 +38,11 @@ const notUrl = CHANNELS_ERRORS.get( 'argument_not_url' );
  * @returns HTMLElement img
  */
 function createImageElement ( options ) {
-    let {
+    const {
         className = `${ CHANNELS_CLASSES.image } ${ CHANNELS_CLASSES.imageRound }`,
+    } = options;
+
+    let {
         title,
         url,
         width,
@@ -148,7 +151,7 @@ function getSize ( media ) {
  *
  */
 function createImage ( options ) {
-    let {
+    const {
         classes: {
             containerEl: containerElClass,
             descriptionEl: descriptionElClass,
@@ -158,7 +161,6 @@ function createImage ( options ) {
             descriptionEl: `${ CHANNELS_CLASSES.blockWide } ${ CHANNELS_CLASSES.heading }`,
             imgEl: `${ CHANNELS_CLASSES.image } ${ CHANNELS_CLASSES.imageRound }`,
         },
-        customUrl,
         localized: { title: localizedTitle },
         media,
         tags: {
@@ -172,6 +174,8 @@ function createImage ( options ) {
         },
         title,
     } = options;
+
+    let { customUrl } = options;
 
     const id = getId( title );
     const size = getSize( media );

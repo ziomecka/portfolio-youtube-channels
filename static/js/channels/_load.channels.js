@@ -55,9 +55,11 @@ async function _loadChannels ( options ) {
                 localStorage.setItem( STORAGE_ID, JSON.stringify( data ) );
             }
         } catch ( err ) {
-            /* eslint-disable no-console */
-            console.log( err );
-            /* eslint-enable no-console */
+            if ( process.env.NODE_ENV !== 'production' ) {
+                /* eslint-disable no-console */
+                console.log( err );
+                /* eslint-enable no-console */
+            }
             return undefined;
             // TODO display some error message
         }

@@ -1,12 +1,10 @@
 import {
-    CHANNELS_CLASSES,
-    LISTENERS_ID,
-} from './constants';
-
-import {
     manageDom,
     manageMedia,
 } from '@common';
+
+import { CHANNELS_CLASSES } from './constants';
+import { LISTENERS_ID } from '../constants';
 
 import createImage from './_create.image';
 import createStats from './_create.stats';

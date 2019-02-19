@@ -32,9 +32,9 @@ const DEFAULT_IMAGE_ALT = 'some image';
 const DEFAULT_IMAGE_SIZE = 'default';
 
 const DEFAULT_IMAGE_URL = new Map( [
-    ['default', ''],
-    ['medium', ''],
-    ['high', ''],
+    ['default', 'https://www.markdyble.com/wp-content/uploads/2017/07/pick-me-recruitment-blog.jpg'],
+    ['medium', 'https://www.markdyble.com/wp-content/uploads/2017/07/pick-me-recruitment-blog.jpg'],
+    ['high', 'https://www.markdyble.com/wp-content/uploads/2017/07/pick-me-recruitment-blog.jpg'],
 ] );
 
 const DEFAULT_LINK_URL = '#';

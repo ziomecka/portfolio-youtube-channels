@@ -34,7 +34,7 @@ const isProduction = process.env.NODE_ENV === 'production';
  * @returns HTMLElement
  */
 function _createStats ( options ) {
-    let {
+    const {
         classes: {
             descriptionEl: descriptionElClass,
             detailsEl: detailsElClass,
@@ -42,7 +42,6 @@ function _createStats ( options ) {
             descriptionEl: CHANNELS_CLASSES.flexColumnCenter,
             detailsEl: `${CHANNELS_CLASSES.blockWide} ${CHANNELS_CLASSES.textCenter }`,
         },
-        description,
         tags: {
             descriptionEl,
             detailsEl,
@@ -50,6 +49,10 @@ function _createStats ( options ) {
             descriptionEl: 'p',
             detailsEl: 'span',
         },
+    } = options;
+
+    let {
+        description,
         value,
     } = options;
 
@@ -136,7 +139,7 @@ function _createStats ( options ) {
  * @returns HTMLElement
  */
 function createStats ( options ) {
-    let {
+    const {
         channelsLocalized: {
             statisticsValue,
             subscribers,

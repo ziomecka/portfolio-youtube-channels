@@ -17,8 +17,12 @@ import {
 } from '@channels';
 
 import {
+    detectStorage,
     manageMedia,
 } from '@common';
+
+// DETECT LOCAL STORAGE
+const localStorageAvailable = detectStorage( 'localStorage' );
 
 // ADD MEDIA LISTENERS
 manageMedia.addMediaListeners( { media: MEDIA, window } );
@@ -37,6 +41,7 @@ enableFiltering( {
     containerSelector: filterContainer,
     field: 'title',
     filterSelector: filterId,
+    localStorageAvailable,
     root: CHANNELS_ROOT_SELECTOR,
     url: filterChannelsUrl,
 } );
@@ -111,4 +116,7 @@ enableClearing( {
 } );
 
 // LOAD CHANNELS
-loadChannels( { root: CHANNELS_ROOT_SELECTOR } );
+loadChannels( {
+    localStorageAvailable,
+    root: CHANNELS_ROOT_SELECTOR,
+} );

@@ -13,7 +13,11 @@ import { createChannels } from './create/';
 import { removeChannels } from './remove/';
 
 async function _loadChannels ( options ) {
-    const { root } = options;
+    const {
+        localStorageAvailable,
+        root,
+    } = options;
+
     let { data } = options;
 
     /**
@@ -28,11 +32,13 @@ async function _loadChannels ( options ) {
      * - use the data to createChannels
      */
     if ( !data ) {
-        data = localStorage.getItem( STORAGE_ID );
+        if ( localStorageAvailable ) {
+            data = localStorage.getItem( STORAGE_ID );
 
-        if ( data ) {
-            // add channels recived from localStorage
-            createChannels( { data: JSON.parse( data ), root } );
+            if ( data ) {
+                // add channels recived from localStorage
+                createChannels( { data: JSON.parse( data ), root } );
+            }
         }
 
         try {
@@ -44,8 +50,10 @@ async function _loadChannels ( options ) {
             // add channels received from server
             createChannels( { data, root } );
 
-            // store channels in localStorage
-            localStorage.setItem( STORAGE_ID, JSON.stringify( data ) );
+            if ( localStorageAvailable ) {
+                // store channels in localStorage
+                localStorage.setItem( STORAGE_ID, JSON.stringify( data ) );
+            }
         } catch ( err ) {
             /* eslint-disable no-console */
             console.log( err );

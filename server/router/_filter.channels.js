@@ -1,5 +1,6 @@
 const { filterData } = require( '../data/' );
 const { readQuery } = require( '../common/' );
+const { readSession } = require( '../session/' );
 const sendBody = require( './_send.body' );
 
 /**
@@ -11,7 +12,9 @@ async function filterChannels ( ctx, next ) {
     const { sort } = ctx.query;
     const { direction } = ctx.query;
 
-    const body = await filterData( { field, text: value, next, sort, direction } )
+    const session = readSession( ctx );
+
+    const body = await filterData( { field, text: value, next, session, sort, direction } )
         .catch( err => ( { err: err.message || err.toString() } ) )
         .then( filteredData =>  ( { result: filteredData } ) );
 

@@ -4,6 +4,7 @@ const callback = require( './callback' );
 const defaultComparator = require( '../sort/comparator' );
 const getData = require( '../get/' );
 const sortCallback = require( '../sort/callback' );
+const storeData = require( '../store/' );
 const validateComparator = require( '../sort/validate.comparator' );
 
 async function filterData ( options ) {
@@ -11,6 +12,7 @@ async function filterData ( options ) {
         comparator = defaultComparator,
         direction,
         field,
+        session,
         sort,
         text,
     } = options;
@@ -60,6 +62,12 @@ async function filterData ( options ) {
                 direction: sort ? direction: undefined,
             };
 
+            if ( LOG ) {
+                console.log( 'filterData: I request to store the filtered data' ); // eslint-disable-line
+            }
+
+            storeData( { session, data: result } );
+
             return result;
         } else {
             throw new Error( 'filterData: incorrect field or text' );
@@ -81,6 +89,12 @@ async function filterData ( options ) {
             data: sortedData,
             direction: sort ? direction: undefined,
         };
+
+        if ( LOG ) {
+            console.log( 'filterData: I request to store the sorted complete data' ); // eslint-disable-line
+        }
+
+        storeData( { session, data: result } );
 
         return result;
     }

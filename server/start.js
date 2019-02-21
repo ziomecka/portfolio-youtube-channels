@@ -5,6 +5,7 @@ const errorHandler = require( './error.handler/' );
 const koaStatic = require( 'koa-static' );
 const path = require( 'path' );
 const router = require( './router' );
+const { session } = require( './session/' );
 
 async function runServer () {
 
@@ -13,6 +14,13 @@ async function runServer () {
     const app = new Koa();
 
     app.on( 'error',  errorHandler );
+
+    // required for signed cookies
+    app.keys = isProduction
+        ? [process.env.KOA_KEYS]
+        : ['something-11653'];
+
+    app.use ( session );
 
     const dir = isProduction
         ? path.resolve( __dirname, '../bundleProd/' )

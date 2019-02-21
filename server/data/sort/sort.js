@@ -4,6 +4,7 @@ const { DEFAULT_DIRECTION } = require( './constants' );
 const callback = require( './callback' );
 const defaultComparator = require( './comparator' );
 const getData = require( '../get' );
+const storeData = require( '../store' );
 const validateComparator = require( './validate.comparator' );
 
 async function sortData ( options ) {
@@ -11,6 +12,7 @@ async function sortData ( options ) {
         field,
         comparator = defaultComparator,
         direction = DEFAULT_DIRECTION,
+        session,
     } = options;
 
     const { LOG } = process.env;
@@ -41,6 +43,12 @@ async function sortData ( options ) {
         data: [...data.data].sort( callback( { comparator, direction, field } ) ),
         direction,
     };
+
+    if ( LOG ) {
+        console.log( 'sortData: I request to store the sorted data' ); // eslint-disable-line
+    }
+
+    storeData( { session, data: result } );
 
     /** return the localized general data && the sorted data (copy is made) */
     return result;

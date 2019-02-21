@@ -1,4 +1,5 @@
 require( 'dotenv' ).config();
+
 const path = require( 'path' );
 
 const Koa = require( 'koa' );
@@ -14,21 +15,16 @@ async function runServer () {
         ? path.resolve( __dirname, '../bundleProd/' )
         : path.resolve( __dirname, '../bundleDev/' );
 
-    /* eslint-disable no-console */
-    console.log( `Static files are served from: ${ dir }` );
-    /* eslint-enable no-console */
-
     const app = new Koa();
+    if ( process.env.LOG ) {
+        console.log( `Static files are served from: ${ dir }` ); // eslint-disable-line
+    }
 
     app.use( koaStatic( dir ) );
     app.use( router );
     app.listen( PORT );
 
-    /* eslint-disable no-console */
-    console.log( `server started at ${ PORT }` );
-    /* eslint-enable no-console */
+    console.log( `server started at ${ PORT }` ); // eslint-disable-line
 }
 
-/* eslint-disable no-console */
-runServer().catch( console.error );
-/* eslint-enable no-console */
+runServer().catch( console.error ); // eslint-disable-line

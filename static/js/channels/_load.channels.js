@@ -4,12 +4,9 @@ import {
     URLS,
 } from './constants';
 
-import {
-    api,
-    manageMedia,
-} from '@common';
-
+import api from './api/';
 import { createChannels } from './create/';
+import { manageMedia } from '@common';
 import { removeChannels } from './remove/';
 
 async function _loadChannels ( options ) {

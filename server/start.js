@@ -1,6 +1,7 @@
 require( 'dotenv' ).config();
 
 const Koa = require( 'koa' );
+const errorHandler = require( './error.handler/' );
 const koaStatic = require( 'koa-static' );
 const path = require( 'path' );
 const router = require( './router' );
@@ -10,6 +11,8 @@ async function runServer () {
     const isProduction = process.env.NODE_ENV === 'production';
 
     const app = new Koa();
+
+    app.on( 'error',  errorHandler );
 
     const dir = isProduction
         ? path.resolve( __dirname, '../bundleProd/' )

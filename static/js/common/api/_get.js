@@ -36,7 +36,7 @@ async function get ( options ) {
      * @return either resolve Promise with data or reject Promise with error
      */
     try {
-        const response = await fetch( getUrl, { method: 'GET' } );
+        const response = await fetch( getUrl, { method: 'GET', credentials: 'include' } );
         const data = await response.json();
 
         const { result, err } = data;

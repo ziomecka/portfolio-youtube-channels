@@ -1,8 +1,8 @@
 import {
-    api,
     isValidUrl,
 } from '@common';
 
+import api from '../api/';
 import loadChannels from '../_load.channels';
 
 function listener ( options ) {

@@ -1,7 +1,10 @@
+const copySvgFiles = require( './copy.svg.files' );
 const ExtractTextPlugin = require( 'extract-text-webpack-plugin' );
 const HtmlWebpackPlugin = require( 'html-webpack-plugin' );
 const OptimizeCssAssetsPlugin = require( 'optimize-css-assets-webpack-plugin' );
 const path = require( 'path' );
+
+const svgFiles = copySvgFiles( { to: 'svg/' } );
 
 const optimizeCss = new OptimizeCssAssetsPlugin( {
     assetNameRegExp: /\.css$/,
@@ -54,6 +57,7 @@ module.exports = {
         extractCss,
         html,
         optimizeCss,
+        svgFiles,
     ],
     resolve: {
         alias: {

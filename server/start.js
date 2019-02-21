@@ -1,27 +1,31 @@
 require( 'dotenv' ).config();
 
-const path = require( 'path' );
-
 const Koa = require( 'koa' );
 const koaStatic = require( 'koa-static' );
+const path = require( 'path' );
 const router = require( './router' );
 
 async function runServer () {
-    const PORT = process.env.NODE_ENV === 'production'
-        ? process.env.PORT
-        : 3000;
 
-    const dir = process.env.NODE_ENV === 'production'
+    const isProduction = process.env.NODE_ENV === 'production';
+
+    const app = new Koa();
+
+    const dir = isProduction
         ? path.resolve( __dirname, '../bundleProd/' )
         : path.resolve( __dirname, '../bundleDev/' );
 
-    const app = new Koa();
     if ( process.env.LOG ) {
         console.log( `Static files are served from: ${ dir }` ); // eslint-disable-line
     }
 
     app.use( koaStatic( dir ) );
     app.use( router );
+
+    const PORT = isProduction
+        ? process.env.PORT
+        : 3000;
+
     app.listen( PORT );
 
     console.log( `server started at ${ PORT }` ); // eslint-disable-line

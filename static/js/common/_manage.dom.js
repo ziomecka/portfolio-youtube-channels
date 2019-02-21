@@ -168,26 +168,7 @@ function getFirstChild ( element ) {
  * @returns HTMLElement | undefined - If removed then removed HTMLElement returned
  */
 function removeChild ( options ) {
-    // polyfill the remove() method in Internet Explorer 9 and higher
-    // https://developer.mozilla.org/en-US/docs/Web/API/ChildNode/remove
-    ( function ( arr ) {
-        arr.forEach( function ( item ) {
-            if ( item.hasOwnProperty( 'remove' ) ) {
-                return;
-            }
-            Object.defineProperty( item, 'remove', {
-                configurable: true,
-                enumerable: true,
-                writable: true,
-                value: function remove () {
-                    if ( this.parentNode !== null )
-                        this.parentNode.removeChild( this );
-                },
-            } );
-        } );
-    } )( [Element.prototype, CharacterData.prototype, DocumentType.prototype] );
-
-    return options.element.remove( options.child );
+    return options.element.removeChild( options.child );
 }
 
 /**

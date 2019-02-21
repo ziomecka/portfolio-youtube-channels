@@ -10,22 +10,27 @@ import {
 } from './constants';
 
 import {
+    detectStorage,
+    manageMedia,
+} from '@common';
+
+import {
     enableClearing,
     enableFiltering,
     enableSorting,
     loadChannels,
 } from '@channels';
 
-import {
-    detectStorage,
-    manageMedia,
-} from '@common';
-
 // DETECT LOCAL STORAGE
 const localStorageAvailable = detectStorage( 'localStorage' );
 
 // ADD MEDIA LISTENERS
 manageMedia.addMediaListeners( { media: MEDIA, window } );
+
+const {
+    container: sortContainer,
+    id: sortId,
+} = SORT;
 
 // ADD FILTERS
 const {
@@ -43,6 +48,7 @@ enableFiltering( {
     filterSelector: filterId,
     localStorageAvailable,
     root: CHANNELS_ROOT_SELECTOR,
+    sortSelector: sortId,
     url: filterChannelsUrl,
 } );
 
@@ -55,11 +61,6 @@ enableFiltering( {
 // });
 
 // ADD SORTERS
-const {
-    container: sortContainer,
-    id: sortId,
-} = SORT;
-
 const {
     sortChannels: sortChannelsUrl,
 } = URLS;

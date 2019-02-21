@@ -16,6 +16,7 @@ function filterChannels ( options = {} ) {
         field,
         filterSelector,
         root,
+        sortSelector,
         url,
     } = options;
 
@@ -47,7 +48,7 @@ function filterChannels ( options = {} ) {
     addListeners( {
         event: 'input',
         id: LISTENERS_ID,
-        listener: listener( { field, root, url } ),
+        listener: listener( { field, root, sortSelector, url } ),
         root,
         selector: buildId( id ),
         window,

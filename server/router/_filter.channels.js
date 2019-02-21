@@ -8,7 +8,10 @@ const sendBody = require( './_send.body' );
  */
 async function filterChannels ( ctx, next ) {
     const { field, value } = readQuery( ctx.query );
-    const body = await filterData( { field, text: value, next } )
+    const { sort } = ctx.query;
+    const { direction } = ctx.query;
+
+    const body = await filterData( { field, text: value, next, sort, direction } )
         .catch( err => ( { err: err.message || err.toString() } ) )
         .then( filteredData =>  ( { result: filteredData } ) );
 

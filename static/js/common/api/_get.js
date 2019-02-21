@@ -1,7 +1,7 @@
-import { COMMON_ERRORS } from './constants';
+import { COMMON_ERRORS } from '../constants';
 import fetch from 'node-fetch';
 import { isValidUrl } from '@common';
-import prepareApiQuery from './_api.prepare.query';
+import prepareApiQuery from './_prepare.query';
 
 /**
  *
@@ -51,6 +51,4 @@ async function get ( options ) {
     }
 }
 
-export default {
-    get,
-};
+export default get;

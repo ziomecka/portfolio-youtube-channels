@@ -10,6 +10,7 @@ async function getChannels ( ctx, next ) {
         .catch( err => ( { err: err.message || err.toString() } ) )
         .then( completeData => ( { result: completeData } ) );
 
+    ctx.deleteSessionData = true;
     sendBody( { ctx, next, body } );
 }
 

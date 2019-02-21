@@ -15,6 +15,7 @@ async function sortChannels ( ctx, next ) {
         .catch( err => ( { err: err.message || err.toString() } ) )
         .then( sortedData => ( { result: sortedData } ) );
 
+    ctx.deleteSessionData = false;
     sendBody( { ctx, next, body } );
 }
 

@@ -1,6 +1,8 @@
 require( 'dotenv' ).config();
 
 const Koa = require( 'koa' );
+
+const { clearData } = require( './data/' );
 const errorHandler = require( './error.handler/' );
 const koaStatic = require( 'koa-static' );
 const path = require( 'path' );
@@ -20,7 +22,7 @@ async function runServer () {
         ? [process.env.KOA_KEYS]
         : ['something-11653'];
 
-    app.use ( session );
+    app.use( session );
 
     const dir = isProduction
         ? path.resolve( __dirname, '../bundleProd/' )
@@ -32,6 +34,9 @@ async function runServer () {
 
     app.use( koaStatic( dir ) );
     app.use( router );
+
+    // middleware used to clear session data
+    app.use( clearData );
 
     const PORT = isProduction
         ? process.env.PORT

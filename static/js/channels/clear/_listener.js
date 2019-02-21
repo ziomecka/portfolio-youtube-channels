@@ -7,14 +7,11 @@ import {
     CHANNELS_ROOT_SELECTOR,
 } from '@constants';
 
+import { getSorted } from '../common/';
 import loadChannels from '../_load.channels';
 
 const { isNotEmptyString } = helpers;
-
-const {
-    findAllElements,
-    findElement,
-} = manageDom;
+const { findElement } = manageDom;
 
 /**
  *
@@ -45,14 +42,8 @@ function listener ( options ) {
                 window,
             } );
 
-            // finds collection of sort elements
-            const $sorts = findAllElements( {
-                selector: `[id^="${ sortSelector }"]`,
-                window,
-            } );
-
-            // finds one sorted element - the selected one
-            const $selectedSort = [...$sorts].find( $element => $element.checked );
+            // finds the selected sorted element
+            const $selectedSort = getSorted( sortSelector );
 
             // CLEAR
 

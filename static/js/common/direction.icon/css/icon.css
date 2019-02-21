@@ -1,0 +1,20 @@
+.fjs-sort-icon {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+}
+
+/* #ff5a00 - color of the clear button */
+.fjs-sort-icon svg path:nth-child(2) {
+    fill: #ff5a00;
+}
+
+/* commented classes are used if icon is a background image */
+
+/* .fjs-sort-icon-asc {
+    background: no-repeat center url('/svg/arrow-up.svg');
+}
+
+.fjs-sort-icon-desc {
+    background: no-repeat center url('/svg/arrow-down.svg');
+} */

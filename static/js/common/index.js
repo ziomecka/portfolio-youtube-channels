@@ -1,4 +1,5 @@
 export { MEDIA } from './constants';
+export { default as directionIcon } from './direction.icon/';
 export { default as manageDomListeners } from './dom.listeners';
 export { default as buildId } from './_build.id';
 export { default as api } from './api/';

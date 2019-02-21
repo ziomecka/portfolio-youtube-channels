@@ -1,7 +1,5 @@
-import {
-    api,
-    isValidUrl,
-} from '@common';
+import api from '../api/';
+import { isValidUrl } from '@common';
 
 import loadChannels from '../_load.channels';
 

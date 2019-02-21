@@ -53,6 +53,11 @@ module.exports = {
             },
         ],
     },
+    node: {
+        fs: 'empty',  // to remove the error "can't resolve fs" which
+        // is displayed when unit tests are run
+        // the error results from using dotenv in server files
+    },
     plugins: [
         extractCss,
         html,

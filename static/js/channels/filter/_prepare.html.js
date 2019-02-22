@@ -1,4 +1,7 @@
 import {
+    CONTAINER_SELECTOR,
+    DEFAULT_ELEMENTS,
+    DEFAULT_ID,
     DEFAULT_PLACEHOLDER,
     STORAGE_PLACEHOLDER_ID,
 } from './constants';
@@ -34,17 +37,34 @@ function _getPlaceholder () {
     }
 }
 
-function filterElement ( id ) {
+function filterElement ( options ) {
+    const {
+        id,
+        $elements: {
+            $wrapper: {
+                tag: wrapperTag,
+                attributes: wrapperAttributes,
+            },
+            $input: {
+                tag: inputTag,
+                attributes: inputAttributes,
+            },
+        },
+    } = Object( options );
+
     const $fragment = document.createDocumentFragment();
 
-    const $wrapper = createElement( { attributes: { class: 'filter fjs-block-wide' }, window } );
+    const $wrapper = createElement( {
+        attributes: wrapperAttributes,
+        tag: wrapperTag,
+        window,
+    } );
 
     const $input = createElement( {
-        tag: 'input',
+        tag: inputTag,
         attributes: {
+            ...inputAttributes,
             id,
-            class: 'filter__input',
-            type: 'text',
             placeholder: _getPlaceholder(),
         },
         window,
@@ -66,15 +86,22 @@ function filterElement ( id ) {
 function prepareHTML ( options ) {
     const {
         field,
-        id = 'fjs-filter-input',
-        selector = '#fjs-filter-container',
-    } = options;
+        id = DEFAULT_ID,
+        selector = CONTAINER_SELECTOR,
+        $elements: {
+            $input = DEFAULT_ELEMENTS.$input,
+            $wrapper = DEFAULT_ELEMENTS.$wrapper,
+        } = DEFAULT_ELEMENTS,
+    } = Object( options );
 
-    const _id = `${ id }-${field}-${ counter++ }`;
+    const _id = `${ id }-${ field }-${ counter++ }`;
 
     appendChild( {
         element: findElement( { selector, window } ),
-        child: filterElement( _id ),
+        child: filterElement( {
+            id: _id,
+            $elements: { $input, $wrapper },
+        } ),
     } );
 
     return _id;

@@ -14,6 +14,7 @@ if ( process.env.NODE_ENV !== 'production' ) {
         ['media_query_not_function', 'Listener is not a function'],
     ] );
 }
+const SORT_ID_PREFIX = 'sort-';
 
 const VALID_ELEMENTS = [
     'a',
@@ -34,5 +35,6 @@ export {
     BREAKPOINTS,
     COMMON_ERRORS,
     MEDIA,
+    SORT_ID_PREFIX,
     VALID_ELEMENTS,
 };

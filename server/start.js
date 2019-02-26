@@ -1,50 +1,22 @@
-require( 'dotenv' ).config();
+const path = require( 'path' );
 
 const Koa = require( 'koa' );
-
-const { clearData } = require( './data/' );
-const errorHandler = require( './error.handler/' );
 const koaStatic = require( 'koa-static' );
-const path = require( 'path' );
-const router = require( './router' );
-const { session } = require( './session/' );
+const getPort = require( 'get-port' );
 
 async function runServer () {
-
-    const isProduction = process.env.NODE_ENV === 'production';
+    const port = await getPort( { port: 3000 } );
 
     const app = new Koa();
 
-    app.on( 'error',  errorHandler );
+    const dir = process.env.NODE_ENV === 'production'
+        ? 'bundleProd'
+        : 'bundleDev';
 
-    // required for signed cookies
-    app.keys = isProduction
-        ? [process.env.KOA_KEYS]
-        : ['something-11653'];
+    app.use( koaStatic( path.join( __dirname, '..', dir ) ) );
+    app.listen( port );
 
-    app.use( session );
-
-    const dir = isProduction
-        ? path.resolve( __dirname, '../bundleProd/' )
-        : path.resolve( __dirname, '../bundleDev/' );
-
-    if ( process.env.LOG ) {
-        console.log( `Static files are served from: ${ dir }` ); // eslint-disable-line
-    }
-
-    app.use( koaStatic( dir ) );
-    app.use( router );
-
-    // middleware used to clear session data
-    app.use( clearData );
-
-    const PORT = isProduction
-        ? process.env.PORT
-        : 3000;
-
-    app.listen( PORT );
-
-    console.log( `server started at ${ PORT }` ); // eslint-disable-line
+    console.log( `server started at http://localhost:${port}/` ); // eslint-disable-line
 }
 
 runServer().catch( console.error ); // eslint-disable-line

@@ -10,3 +10,5 @@ export { default as convertNumbers } from './_convert.numbers';
 export { default as detectMedia } from './_detect.media';
 export { default as isValidUrl } from './_is.valid.url';
 export { default as manageDom } from './_manage.dom';
+export { default as createElement } from './_dom.create.element';
+export { default as getCheckedElement } from './_get.checked.element';

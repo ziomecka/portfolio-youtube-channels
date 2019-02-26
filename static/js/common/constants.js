@@ -25,6 +25,8 @@ const VALID_ELEMENTS = [
     'label',
     'li',
     'p',
+    'picture',
+    'source',
     'span',
 ];
 

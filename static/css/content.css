@@ -15,7 +15,6 @@
     margin: 0;
 }
 
-.fjs-content,
 .fjs-flex-column,
 .fjs-flex-column-center {
     flex-direction: column;
@@ -51,7 +50,7 @@
 
 .fjs-box-primary {
     justify-content: space-between;
-    flex: 1 0 100%;
+    flex: 1 1 100%;
     width: 100%;
     margin: 10px 0;
     padding: 10px;
@@ -63,11 +62,12 @@
 } */
 
 @media only screen and (min-width: 946px) {
+    /* ( 5px * 2 boxes * 2 sides - 10px for the outermost left and right ) * -50% = -5px  */
     .fjs-box-primary {
-        flex: 1 0 calc(50% - 10px);
-        width: calc(50% - 10px);
+        flex: 1 1 calc(50% - 5px);
+        width: calc(50% - 5px);
         margin: 10px 5px;
-        max-width: calc(50% - 10px);
+        max-width: calc(50% - 5px);
     }
     .fjs-box-primary:nth-of-type(odd) {
         margin-left: 0;
@@ -84,10 +84,11 @@
 /* desktop */
 
 @media only screen and (min-width: 1281px) {
+    /* ( 5px * 4 boxes * 2 sides - 10px for the outermost left and right ) * -25% = -7.5px  */
     .fjs-box-primary {
-        flex: 1 0 calc(25% - 10px);
-        width: calc(25% - 10px);
-        max-width: calc(25% - 10px);
+        flex: 1 1 calc(25% - 7.5px);
+        width: calc(25% - 7.5px);
+        max-width: calc(25% - 7.5px);
     }
     .fjs-box-primary:nth-of-type(odd) {
         margin-left: 5px;
@@ -107,10 +108,11 @@
 /* large desktop */
 
 @media only screen and (min-width: 1681px) {
+    /* ( 5px * 5 boxes * 2 sides - 10px for the outermost left and right ) * -20% = -8px  */
     .fjs-box-primary {
-        flex: 1 0 calc(20% - 10px);
-        width: calc(20% - 10px);
-        max-width: calc(20% - 10px);
+        flex: 1 1 calc(20% - 8px);
+        width: calc(20% - 8px);
+        max-width: calc(20% - 8px);
     }
     .fjs-box-primary:nth-of-type(1),
     .fjs-box-primary:nth-of-type(4n + 1) {

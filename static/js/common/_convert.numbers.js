@@ -1,29 +1,4 @@
-import { COMMON_ERRORS } from './constants';
-
-/**
- *
- * @param {string} number
- * @param {separator} string  optional: , || . (comma  || point), default is , (comma)
- * @returns string | undefined
- */
 function convertNumbers ( number, separator = ',' ) {
-    if ( process.env.NODE_ENV !== 'production' ) {
-        if ( ( typeof number !== 'string' ) || ( Number.isNaN( Number( number ) ) ) ) {
-            /* eslint-disable no-console */
-            console.warn( `convertNumbers: ${ COMMON_ERRORS.get( 'convert_numbers_not_number' ) }` );
-            /* eslint-enable no-console */
-            return undefined;
-        }
-
-        if ( ( separator !== ',' ) && ( separator !== '.' ) ) {
-            /* eslint-disable no-console */
-            console.warn( `convertNumbers: ${ COMMON_ERRORS.get( 'argument_incorrect' ) }` );
-            /* eslint-enable no-console */
-            return undefined;
-        }
-    }
-
-    // Assumed - number is a stringified positive integer
     if ( ( typeof number === 'string' ) && ( !Number.isNaN( Number( number ) ) ) ) {
         const { length } = number;
 

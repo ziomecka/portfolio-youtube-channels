@@ -30,7 +30,7 @@ module.exports = {
         rules: [
             {
                 test: /\.js$/,
-                exclude: /node_modules|test|server/,
+                exclude: /node_modules|test|server|get.property/,
                 use: [
                     'babel-loader',
                 ],
@@ -53,11 +53,6 @@ module.exports = {
                 } ),
             },
         ],
-    },
-    node: {
-        fs: 'empty',  // to remove the error "can't resolve fs" which
-        // is displayed when unit tests are run
-        // the error results from using dotenv in server files
     },
     plugins: [
         extractCss,

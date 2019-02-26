@@ -12,3 +12,4 @@ export { default as isValidUrl } from './_is.valid.url';
 export { default as manageDom } from './_manage.dom';
 export { default as createElement } from './_dom.create.element';
 export { default as getCheckedElement } from './_get.checked.element';
+export { default as manageDomListeners } from './dom.listeners';

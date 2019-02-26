@@ -1,7 +1,7 @@
 /* eslint-disable no-console, no-undef, no-global-assign */
-import helper from './_filter.helper';
+import createResults from './_filter.create.results';
 
-describe( 'filter helper', () => {
+describe( 'filter createResults', () => {
     let data;
 
     beforeEach( () => {
@@ -21,34 +21,34 @@ describe( 'filter helper', () => {
         const pattern = 'd';
         const field = 'foo';
 
-        expect( helper( { data, pattern, field } ).result ).toEqual( [data[0], data[1]] );
-        expect( helper( { data, pattern, field } ).count ).toBe( 2 );
+        expect( createResults( data, pattern, field ).result ).toEqual( [data[0], data[1]] );
+        expect( createResults( data, pattern, field ).count ).toBe( 2 );
     } );
 
     it( 'returns object with correct result and count properties', () => {
         const pattern = '3';
         const field = 'loo';
 
-        expect( helper( { data, pattern, field } ).result ).toEqual( [data[1]] );
-        expect( helper( { data, pattern, field } ).count ).toBe( 1 );
+        expect( createResults( data, pattern, field ).result ).toEqual( [data[1]] );
+        expect( createResults( data, pattern, field ).count ).toBe( 1 );
     } );
 
     it( 'returns object with correct result (empty array) and count (0) properties', () => {
         const pattern = 'q';
         const field = 'loo';
 
-        expect( helper( { data, pattern, field } ).result ).toEqual( [] );
-        expect( helper( { data, pattern, field } ).count ).toBe( 0 );
+        expect( createResults( data, pattern, field ).result ).toEqual( [] );
+        expect( createResults( data, pattern, field ).count ).toBe( 0 );
     } );
 
-    it( 'throws error if pattern is undefined', () => {
+    it( 'returns empty array if pattern is undefined', () => {
         const field = 'loo';
 
-        expect( () => helper( { data, field } ).result ).toThrowError();
+        expect( createResults( data, undefined, field ).result ).toEqual( [] );
     } );
 
     it( 'returns empty array if field is undefined', () => {
         const pattern = 'q';
-        expect( helper( { data, pattern } ).result ).toEqual( [] );
+        expect( createResults( data, pattern ).result ).toEqual( [] );
     } );
 } );

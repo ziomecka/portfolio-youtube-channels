@@ -1,16 +1,22 @@
 require( './css/index.css' );
 
-import { DIRECTIONS } from '@channelsData/constants';
-import { DIRECTIONS_SVGS } from './constants';
+import { DIRECTIONS_URLS } from './constants';
 
-function manageDirectionIcon ( selector, direction ) {
+import apiLoadText from '../_api.load.text';
+
+async function manageDirectionIcon ( selector, direction ) {
     const $svgWrapper = document.querySelector( selector );
 
     if ( $svgWrapper ) {
-        // render inline svg or ''
-        $svgWrapper.innerHTML = ( DIRECTIONS.includes( direction ) )
-            ? DIRECTIONS_SVGS[direction]
-            : '';
+        // if no direction then icon removed
+        let innerHTML = '';
+
+        if ( direction === 'asc' || direction ==='desc' ) {
+            innerHTML = await apiLoadText( DIRECTIONS_URLS[direction] );
+        }
+
+        $svgWrapper.innerHTML = innerHTML;
+
     }
 }
 

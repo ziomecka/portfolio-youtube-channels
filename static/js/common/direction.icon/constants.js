@@ -4,12 +4,12 @@ const DIRECTIONS_CLASSES = {
     general: 'fjs-sort-icon',
 };
 
-const DIRECTIONS_SVGS = {
-    asc: require( '@svg/arrow-up.svg' ),
-    desc: require( '@svg/arrow-down.svg' ),
+const DIRECTIONS_URLS = {
+    asc: 'svg/arrow-up.svg',
+    desc: 'svg/arrow-down.svg',
 };
 
 export {
     DIRECTIONS_CLASSES,
-    DIRECTIONS_SVGS,
+    DIRECTIONS_URLS,
 };

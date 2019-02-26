@@ -1,5 +1,5 @@
 /* eslint-disable no-console, no-undef, no-global-assign */
-import getProperty  from '@server/sort/get.property';
+import getProperty from '@channelsData/sort/get.property';
 
 describe( 'getProperty', () => {
     let obj;
@@ -15,48 +15,44 @@ describe( 'getProperty', () => {
     } );
 
     it( 'returns inner most property', () => {
-        const result = getProperty( { obj, arr: ['foo', 'poo', 'loo'] } );
+        const result = getProperty( obj, ['foo', 'poo', 'loo'] );
 
         expect( result ).toEqual( obj.foo.poo.loo );
     } );
 
     it( 'returns middle property', () => {
-        const result = getProperty( { obj, arr: ['foo', 'poo'] } );
+        const result = getProperty( obj, ['foo', 'poo'] );
 
         expect( result ).toEqual( obj.foo.poo );
     } );
 
     it( 'returns outer most property', () => {
-        const result = getProperty( { obj, arr: ['foo'] } );
+        const result = getProperty( obj, ['foo'] );
 
         expect( result ).toEqual( obj.foo );
     } );
 
     it( 'returns undefined if property does not exist', () => {
-        const result = getProperty( { obj, arr: ['does not exist'] } );
+        const result = getProperty( obj, ['does not exist'] );
 
         expect( result ).toBe( undefined );
     } );
 
     it( 'returns object if arr is empty', () => {
-        const result = getProperty( { obj, arr: [] } );
+        const result = getProperty( obj, [] );
 
         expect( result ).toEqual( obj );
     } );
 
     it( 'returns object if arr is undefined', () => {
-        const result = getProperty( { obj } );
+        const result = getProperty( obj );
 
         expect( result ).toEqual( obj );
     } );
 
-    it( 'throws err if obj is undefined', () => {
-        const result = getProperty( {} );
+    it( 'throws err if arguments not provided', () => {
+        const result = getProperty();
 
         expect( result ).toBe( undefined );
-    } );
-
-    it( 'throws err if arguments not provided', () => {
-        expect( () => getProperty() ).toThrowError();
     } );
 } );

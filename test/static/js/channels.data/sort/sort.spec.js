@@ -1,7 +1,7 @@
 /* eslint-disable no-console, no-undef, no-global-assign */
-import comparator from '@server/sort/comparator';
 import data from './_data';
 import expectedResult from './_results.json';
+import sortData from '@channelsData/sort/';
 
 describe( 'function sort', () => {
     describe( 'sorts data by not nested key field:', () => {
@@ -10,7 +10,7 @@ describe( 'function sort', () => {
         it( 'title, asc', () => {
             const direction = 'asc';
 
-            const testedResult = data.sort( comparator( { field, direction } ) );
+            const testedResult = sortData( data, field, direction );
 
             expect( testedResult ).toEqual( expectedResult.titleAsc );
         } );
@@ -18,7 +18,7 @@ describe( 'function sort', () => {
         it( 'title, desc', () => {
             const direction = 'desc';
 
-            const testedResult = data.sort( comparator( { field, direction } ) );
+            const testedResult = sortData( data, field, direction );
 
             expect( testedResult ).toEqual( expectedResult.titleDesc );
         } );
@@ -29,7 +29,7 @@ describe( 'function sort', () => {
             const field = 'statistics.subscriberCount';
             const direction = 'desc';
 
-            const testedResult = data.sort( comparator( { field, direction } ) );
+            const testedResult = sortData( data, field, direction );
 
             expect( testedResult ).toEqual( expectedResult.subscriberCountDesc );
         } );
@@ -38,7 +38,7 @@ describe( 'function sort', () => {
             const field = 'statistics.viewCount';
             const direction = 'asc';
 
-            const testedResult = data.sort( comparator( { field, direction } ) );
+            const testedResult = sortData( data, field, direction );
 
             expect( testedResult ).toEqual( expectedResult.viewCountAsc );
         } );

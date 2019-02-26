@@ -1,12 +1,12 @@
 // require becasue used in create.results (can be run via node and I do not babel node )
 const lodashOrder = require( 'lodash.orderby' );
-const getProperty = require( '../../../../server/data/sort/get.property' );
+const getProperty = require( '../../../../../../static/js/channels.data/sort/get.property' );
 
-function iteratee ( field ) {
+function lodashIteratee ( field ) {
     return (
         ( item ) => {
             // getProperty has been tested
-            const objectProperty = getProperty( { arr: field.split( '.' ), obj: item } );
+            const objectProperty = getProperty( item, field.split( '.' ) );
             const number = Number( objectProperty );
 
             /**
@@ -32,32 +32,16 @@ function iteratee ( field ) {
  *  - goes to end (asc)
  *  - goes to beginning (desc)
  * */
-const helper = ( options ) => {
-    const {
-        data,
-        directions,
-    } = options;
-
-    let { fields } = options;
-
-    if (
-        !Array.isArray( fields ) ||
-        !Array.isArray( directions ) ||
-        fields.length !== directions.length ||
-        directions.some( item => ( item !== 'asc' ) && ( item !=='desc' ) )
-    ) {
-        throw new Error( 'helper: arguments incorrect' );
-    }
-
+const createResults = ( data, fields, directions ) => {
     /**
-     * For each field pass to lodash an iteratee.
+     * For each field pass to lodash the lodashIteratee.
      * Thanks to is the lodash sort becomes case insensitive
      */
-    return lodashOrder( data, fields.map( iteratee ), directions );
+    return lodashOrder( data, fields.map( lodashIteratee ), directions );
 };
 
 module.exports = {
-    helper,
-    iteratee,
+    createResults,
+    lodashIteratee,
 };
 

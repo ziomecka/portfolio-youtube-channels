@@ -21,23 +21,23 @@
                 <h3 class="sort__header">Sort channels by:</h3>
                 <ul id="fjs-sort-container" class="sort__options">
                     <li>
-                        <input class="choice choice--radio" name="sort" type="radio" id="sort-title">
-                        <label class="choice__label" for="sort-title">title</label>
-                    </li>
-                    <li>
-                        <input class="choice choice--radio" name="sort" type="radio" id="sort-subscribers">
-                        <label class="choice__label" for="sort-subscribers">subscribers</label>
-                    </li>
-                    <li>
-                        <input class="choice choice--radio" name="sort" type="radio" id="sort-videos">
-                        <label class="choice__label" for="sort-videos">videos</label>
-                    </li>
-                    <li>
-                        <input class="choice choice--radio" name="sort" type="radio" id="sort-views">
-                        <label class="choice__label" for="sort-views">views</label>
-                    </li>
+                            <input class="choice choice--radio" name="sort" type="radio" id="sort-title" data-sort="title">
+                            <label class="choice__label" for="sort-title">title</label>
+                        </li>
+                        <li>
+                            <input class="choice choice--radio" name="sort" type="radio" id="sort-subscribers" data-sort="statistics.subscriberCount">
+                            <label class="choice__label" for="sort-subscribers">subscribers</label>
+                        </li>
+                        <li>
+                            <input class="choice choice--radio" name="sort" type="radio" id="sort-videos" data-sort="statistics.videoCount">
+                            <label class="choice__label" for="sort-videos">videos</label>
+                        </li>
+                        <li>
+                            <input class="choice choice--radio" name="sort" type="radio" id="sort-views" data-sort="statistics.viewCount">
+                            <label class="choice__label" for="sort-views">views</label>
+                        </li>
                 </ul>
-                <button id="fjs-clear-button" class="button">Clear</button>
+                <button class="button" id="clear">Clear</button>
             </div>
         </aside>
     </body>

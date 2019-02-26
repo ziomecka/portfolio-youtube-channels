@@ -10,12 +10,32 @@
             <h1 class="fjs-header-logo">Channels</h1>
         </header>
         <main id="fjs-main" class="wrapper__main fjs-content"></main>
-        <div id="fjs-filter-container" class="wrapper__filter"></div>
+        <div class="wrapper__filter">
+            <div class="filter">
+                <input class="filter__input" type="text" placeholder="filter channels..." id="filter-title">
+            </div>
+        </div>
         <aside class="wrapper__aside">
             <div class="fjs-sort-content sort">
                 <div class="fjs-sort-icon" role="img" aria-label="Sorting direction"></div>
                 <h3 class="sort__header">Sort channels by:</h3>
                 <ul id="fjs-sort-container" class="sort__options">
+                    <li>
+                        <input class="choice choice--radio" name="sort" type="radio" id="sort-title">
+                        <label class="choice__label" for="sort-title">title</label>
+                    </li>
+                    <li>
+                        <input class="choice choice--radio" name="sort" type="radio" id="sort-subscribers">
+                        <label class="choice__label" for="sort-subscribers">subscribers</label>
+                    </li>
+                    <li>
+                        <input class="choice choice--radio" name="sort" type="radio" id="sort-videos">
+                        <label class="choice__label" for="sort-videos">videos</label>
+                    </li>
+                    <li>
+                        <input class="choice choice--radio" name="sort" type="radio" id="sort-views">
+                        <label class="choice__label" for="sort-views">views</label>
+                    </li>
                 </ul>
                 <button id="fjs-clear-button" class="button">Clear</button>
             </div>

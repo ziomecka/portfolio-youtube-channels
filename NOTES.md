@@ -1,28 +1,70 @@
+k# Najważniejsze zmiany
+Pozwalam sobie na polski, bo szybciej:
+
++ Dane pochodzą z channels.data. Przechowuję:
+    + ostatnie przefiltrowane dane,
+    + pole i kierunek ostatniego sortowania,
+    + ostatni filtr -> po to żeby sprawdzić, czy filtrować to co już jest przefiltrowane, czy filtorwąć wszystko od początku.
+
+Zastanawiałam się czy przechowywać tylko id ostatnio wyfiltrowanych kanałów:
+    + Za: zajmowałoby to mniej miejsca.
+    + Przeciw: trzeba byłoby na podstawie id sklejać komplet danych. A to zajmowane miejsce to pewno pomijalne i tylko na określony czas ( ten czas to jest do zaimplementowania ).
+
++ Waliduję parametry tylko tam gdzie uznałam to za na prawdę potrzebne.
+Kierowałam się tym, czy przeglądarka sama wyrzuci błąd, oraz wygodą programisty (żeby błąd nie przeszedł nie zauważony).
+if (process.production.NODE_ENV === 'production') został tylko w jednym miejscu. Świadomie, webpack 4 wyrzuci.
+
++ Zrezygnowałam z przekazywania argumentów w obiektach, chociaż nadal uważam, że bywa to wygodne.
+
++ Spłaszczyłam foldery, żeby zredukować szum.
+Ale np. nadal exportuję całe manageDomListeners. Dlatego, że ten export traktuję jak obiekt z metodami. Łatwiej się importuje, a przewiduję, że w manageDomListeners pojawią sie metody 'remove', 'removeAll'.
+
++ Ograniczyłam liczbę argumentów, zwłaszcza w funkcjach tworzących HTML.
+Również w celu ograniczenia szumu.
+
++ Skorzystałam z srcSet, bo na szybko nie znalazłam przewagi window.matchMedia. Doczytam dokumentację :-)
+
++ We wcześniejszym rozwiązaniu w 'manageDom' przechowywałam wszystkiem operacje wykonywane na document.
+Drażniło mnie to bo nie było wygodne. A takie rozwiazanie miałoby uzasadnienie w dwóch przypadkach:
+    + ze względu na testowalność kodu,
+    + ze względu na polifaje czy babla, które mogłyby zwiększyć objętość kodu, więc lepiej byłoby to wyrzucić w jedno miejsce.
+Podsumowując: wyodrębniłam tylko createElement, w którym widzę jakąś wartość dodaną.
+
+Wydaje mi się, że kod nadal jest testowalny. Zajrzałam do bundla, nie widzę polifajów. Przejrzałam browsers compatibility dla metod z których korzystam.
+
++ Zrezygnowałam z dynamicznie tworzonego HTMLa. Bo miało być prosto. A dynamicznie to mogę zrobić w react.
+
++ Przypisuję tylko jednego listenera do sortowania. Kosztem dodatkowego atrybutu w HTML.
+Bo uznałam, że lepiej jak będzie jeden listener niż cztery. Podejrzewam, że liczba listenerów wpływa na działanie przeglądarki ( kiedyś się douczę ). Mogłam nie dodawać dodatkowego atrybutu do HTMLa, ale uznałam że nie chcę wykorzystywać id, bo jednak jego wykorzystanie / przeznaczenie jest trochę inne.
+
++ Starałm się nie zmieniać dotychczasowego css.
+Traktuję to jako vendora i co najwyżej robię override'a. Dodałam swoją konwencję nazewnictwa. Być może należałoby ją uspójnić.
+
++ Zastanawiałam się nad koniecznością zrobienia reset w css. Instalowałam normalize.css. Sprawdzałam wpływ na chrome i firefox. Nie zauważyłam różnicy.
+
 # Assumptions
 ## Channels data
-+ Data is received from server.
++ Data is received from browser.
+ created channels.data as it would be on server side
 
 + Channel's title is a unique identifier.
 
-+ Data received from server may be incomplete e.g. 'url' may be empty.
-I assume that the channel should be displayed anyway - some default values are displayed.
++ Translations of descriptions like 'subscribers', 'videos', 'views' is added to channels.json.
+I call it general localized data.
 
-+ Data is localized on the server side on the basis of Accept-Language header, specific URL or preference stored in cookie.
-By 'localized' I mean translation. There is no need to deal with genders or plurals.
-Translations of descriptions like 'subscribers', 'videos', 'views' are received from server.
-The data has been added to channels.json.
++ Data received from server is always complete.
+Also the general localized data is complete.
+If some statistics were undefined the channels.json would contain '-';
+
++ Images have always three sizes: default, medium and high
 
 + Values: subscriberCount, videoCount, viewCount are always displayed.
 If value is falsy then default value (received from server) is rendered.
 
 + Value: subscriberCount is hidden by default.
 
-## Server
-+ Session middleware is simplified.
-+ Session data is stored in object. It is definitely not for production. Data could be stored in MongoDb.
-
 ## Client
-+ At present there is no need to remove single dom listeners.
++ At present there is no need to channelsRemove single dom listeners.
 Therefore, I do not implement solution for removing a single / all listeners. But it should be remembered.
 
 # Stack
@@ -32,32 +74,21 @@ I think jQuery would not be needed anyway because I use babel and most of the do
 
 + Webpack
 I use it because it:
-- removes console.warns in the production code,
+- channelsRemoves console.warns in the production code,
 - can be used as preprocessor in karma,
 - bundles and optimizes the final code.
 - allows to use babel loader, postcss loader (autoprefixer)
-
-+ I use koa-router
-I assume that when user requests channels.json server makes some database query and then sends back the data. So sending channels is not just sending a static file.
-
-+ I removed getPort
-It didn't work with heroku
 
 + Karma + jasmine
 Everybody uses Jest so I decided no to use it.
 
 # Functionality and limitations
-+ More than one filter or additional sorters can be easily added.
 + It may happen then data is not displayed to the client. Some 'error' component could be coded.
 + It may happen that it is takes time to load data. Some 'progress' component could be coded.
 
 # Code - could be done
 + Bundled production files could have been gziped with compression-webpack-plugin.
-+ At present parts of html are generated in the browser. It can affect negatively the performance and positioning. Therefore, they could be generated on the server side (like in React server-side-rendering).
-+ I almost do not throw Errors, just print console.warns. It has occured to be very inconvenient. Therefore, I would change console.warns to Errors.
-+ Also errors' maps are inconvenient -> could be changed to object and reduced to some general errors, or removed.
-+ The server code could be bundled: to make it smaller for production.
-+ The code in the static/js/common directory could be reorganized, for example separate dir for manage.dom and separate files for functions (like it is done for media).
++ I guess i could avoid coding manage.dom
 
 # Tests
 + I would add integration test: to check both filter and sorter in one test. Examples of scenarios:

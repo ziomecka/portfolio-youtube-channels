@@ -1,72 +1,104 @@
-# Front-end task: JS Youtube Channels
+# YouTube Channels
 
 ## Task
+  + Selecting radio button should sort listed channels accordingly.
+  + Filter channels by title based on an input text. Filtering should be case-insensitive.
+  + Pressing `clear` button should reset both sorting options and text filter.
+  + Clicking or tapping on a channel logo should open the link to the channel's youtube page in a new browser card.
+  + Numbers represented in the US/British notation (each 10^3 group separated by a comma) e.g. one million = 1,000,000
 
-1.  Change the HTML structure of `static/index.html` and write remaining CSS rules to mimic  
-    the layout shown on mock-ups located in `screenshots/` directory. 
-    
-2.  Some HTML and CSS have already been written. You need to implement missing components:
-    * heading
-    * channel list
-    
-    `channels.json` file contains all of the necessary youtube channels data.
-    
-3.  Add following behavior to the application:
-    
-    1.  Selecting radio button should sort listed channels accordingly. 
-        Sorting order (asc/desc) is up to you. 
-        
-    2.  Filter channels by title based on an input text. Filtering should be case-insensitive. 
-        
-    3.  Pressing `clear` button should reset both sorting options and text filter.
+## Assumptions
+  + Plain JavaScript (ES6/ES2015+).
+  + No CSS frameworks.
 
-    4.  Clicking or tapping on a channel logo should open the link to the channel's youtube page in a new browser card.
+  ### Channels data
+  + Data is received from server.
+  + Channel's title is a unique identifier.
+  + Data is localized on the server side on the basis of Accept-Language header, specific URL or preference stored in cookie.
+    By 'localized' I mean translation. There is no need to deal with genders or plurals.
+    Translations of descriptions like 'subscribers', 'videos', 'views' are received from server.
+    The data has been added to channels.json.
 
-    5.  Make sure to represent numbers in the US/British notation (each 10^3 group separated by a comma) e.g. one million = 1,000,000
+  ### Server
+  + Session middleware is simplified.
+  + Session data is stored in object. It is definitely not for production. Data could be stored in MongoDB.
 
-4.  Fill out `NOTES.md` file, commenting the task and your solution,
-    e.g. which browsers or devices you tested on, what assumptions or simplifications have been made, etc.
+  ### Client
+  + At present there is no need to remove single dom listeners.
+    Therefore, I do not implement solution for removing a single / all listeners. But it should be remembered.
 
-5.  Add unit tests for parts of your code responsible for sorting and filtering. 
-    If you wish to add more tests, you are welcome to do it.
+## Stack
++ Webpack:
+  + removes console.warns in the production code,
+  + can be used as preprocessor in karma,
+  + bundles and optimizes the final code.
+  + allows to use babel loader, postcss loader (autoprefixer)
++ Koa-router
++ Karma + jasmine
 
-**Solve the task as best as you can. Code quality is more important for us than a quick but mediocre solution.**
+## Functionality and limitations
++ It may happen then data is not displayed to the client. Some 'error' component could be coded.
++ It may happen that it is takes time to load data. Some 'progress' component could be coded.
 
-## Limitations
-*   You must NOT use any JS frameworks (i.e. Angular / React / Redux / Vue). We want to see if you are
-    able to create a working app in plain JavaScript (ES6/ES2015+ is encouraged).
-    
-*   We recommend not to use any CSS frameworks. We want to see what your CSS code looks like.
+## Code - could be done
++ Bundled production files could have been gziped with compression-webpack-plugin.
++ The server code could be bundled: to make it smaller for production.
 
-## Notes
+## Tests - could be done
++ I would add integration test: to check both filter and sorter in one test. Examples of scenarios:
+  + when sort is clicked and filter filled in then the displayed channels should be...
+  + when sort is clicked and filter filled in, and sort changed then the displayed channels should be...
+  + when filter is filled in and sort clicked then the displayed channels should be...
+  + ...
 
-*   Everything else is permitted, including changing code or project structure, adding build tools, testing frameworks or dependencies.
+## Production
+The website is available [online](https://frontend-js-channels.herokuapp.com/)
+However, mongoDB is not implemented
 
-*   Application layout does not have to be pixel-perfect when compared to screenshots.
+## Browsers and Devices tested on
+  ### Browsers
+  + I have checked the website manually in the following browsers (via https://app.lambdatest.com/):
+    + Chrome, versions: 70
+    + Mozilla, versions: 60
+    + Opera, version: 49
+    + IE, version: 10 -- did not work
+    + Safari 4.0 -- did not work
 
-*   Your solution will be judged by its code quality (HTML/CSS/JS) and look and feel of the finished product.
+  + I used vendor-prefixes in css: [autoprefixer](https://autoprefixer.github.io/).
 
+  + Moreover, I included babel and browserslistrc, that covers the following browsers (*npx browserslist*):
+    + and_chr 71
+    + and_uc 11.8
+    + android 4.4.3-4.4.4
+    + chrome 71
+    + chrome 70
+    + chrome 69
+    + chrome 63
+    + chrome 61
+    + chrome 49
+    + edge 18
+    + edge 17
+    + edge 16
+    + edge 15
+    + firefox 64
+    + ie 11
+    + ie 10
+    + ios_saf 12.0-12.1
+    + ios_saf 11.3-11.4
+    + ios_saf 11.0-11.2
+    + ios_saf 10.3
+    + ios_saf 8
+    + op_mini all
+    + opera 57
+    + safari 12
+    + safari 11.1
+    + samsung 4
 
-## Running the task
+  ### Devices
+  + Acer swift 3
+  + LG G6
+  + HTC U11
 
-Node.js 8 or greater is required.
+---
 
-```bash
-$ npm install
-$ npm start
-```
-
-Server address will appear in the terminal.
-
-## How to deliver your solution
-
-*   Create a private repository on [bitbucket.org](https://bitbucket.org)
-    
-*   Put original, unchanged content of this task in _master_ branch. Put your solution in a different branch.
-    
-*   Create a pull request from the branch with your solution to _master_ branch in your repository. 
-    We will go through it and comment your work based on it.
-
-*   Allow `allegrotech` user to view your repository and add it as a pull request reviewer. 
-    
-Good luck!
+[![coded with love](https://img.shields.io/static/v1?label=coded%20with&message=love&color=a53860)](https://img.shields.io/static/v1?label=coded%20with&message=love&color=a53860)

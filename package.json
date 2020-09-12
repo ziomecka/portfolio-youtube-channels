@@ -17,7 +17,7 @@
     "get-port": "4.1.0",
     "koa": "2.5.2",
     "koa-static": "5.0.0",
-    "node-fetch": "2.3.0"
+    "node-fetch": "2.6.1"
   },
   "devDependencies": {
     "@babel/core": "7.3.3",
